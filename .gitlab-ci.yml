@@ -1,0 +1,6 @@
+first-job-1:
+     script:
+          - echo Hello World!
+     tags:
+          - ci
+          - ssh
