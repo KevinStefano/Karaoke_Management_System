@@ -1,5 +1,5 @@
 # Karaoke Management System
-![Karaoke Management System](doc/Pemesanan Ruangan - Biodata.png)
+![Karaoke Management System](/doc/Pemesanan Ruangan - Biodata.png)
 
 Karaoke Management System merupakan aplikasi prototype yang dibuat untuk memenuhi kebutuhan dalam manajemen keuangan, pengelolaan, dan pemesanan ruangan berbasis IT.
 
