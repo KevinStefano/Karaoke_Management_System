@@ -1,7 +1,8 @@
 # Karaoke Management System
-![Karaoke Management System](/doc/Pemesanan Ruangan - Biodata.png)
+![Karaoke Management System](doc/Pemesanan Ruangan - Biodata.png)
 
-Karaoke Management System merupakan aplikasi prototype yang dibuat untuk memenuhi kebutuhan dalam manajemen keuangan, pengelolaan, dan pemesanan ruangan berbasis IT.
+Karaoke Management System (KMS) merupakan aplikasi prototype yang dibuat untuk memenuhi kebutuhan dalam manajemen keuangan, pengelolaan, dan pemesanan ruangan berbasis IT. Dengan aplikasi KMS ini, diharapkan bisa menjadi sarana
+untuk membantu manajemen pemesanan karaoke maupun pengolahan ruangan yang lebih terstruktur.
 
 ## Features
 |No.  |  Features           |Penanggung Jawab               |
@@ -11,6 +12,22 @@ Karaoke Management System merupakan aplikasi prototype yang dibuat untuk memenuh
 |3.   |Pembayaran           |13518041 - Samuel      	    |
 |4.   |Booking Pesanan      |13518056 - Michael Hans 	    |
 |5.   |Membership           |13518077 - Filbert Wijaya      |
+
+### Cara Menjalankan Program
+Untuk menjalankan program, ketik command ini dalam directory `./src` sebagai berikut
+```
+python karaokeapp.py
+```
+
+## Cara Menjalankan Testing
+Untuk menjalankan unit testing, ketik command ini dalam directory `./test` sebagai berikut
+```
+py.test
+```
+Untuk menjalankan unit testing secara spesifik, ketik command sebagai berikut.
+```
+py.test <NamaFileTest>
+```
 
 ## Basis Data
 Basis data yang kami gunakan adalah DatabaseKMS.sql yang terdiri atas 7 tabel, yaitu:
@@ -75,3 +92,45 @@ Basis data yang kami gunakan adalah DatabaseKMS.sql yang terdiri atas 7 tabel, y
 | due_date_lama | date        | YES  |     | NULL    |       |
 | due_date_baru | date        | YES  |     | NULL    |       |
 | total_harga   | int(11)     | YES  |     | NULL    |       |
+
+## Project Structure
+Berikut ini adalah struktur folder dari Avatar Duel.
+```
++---doc
++---src
+|     bookingpesanan.py
+|     membership.py
+|     gui_bookingpesanan.py
+|     gui_membership.py
+|     gui_pembatalanpesanan.py
+|     gui_pembayaran.py
+|     gui_pengolahanruangan.py
+|     karaokeapp.py
+|     membership.py
+|     pembatalanpesanan.py
+|     pembayaran.py
+|     pengolahanruangan.py
+|
++---test
+|     test_bookingpesanan.py
+|     test_membership.py
+|     test_pembatalanpesanan.py
+|     test_pengolahanruangan.py
+|
+|   requirements.txt
+|   .gitlab-ci.yml
+\   README.md
+```
+
+## Author
+IF2250 - Rekayasa Perangkat Lunak
+Kelas K2 Kelompok 11 Tahun Ajaran 2019-2020
+- 13518041 - Samuel
+- 13518056 - Michael Hans
+- 13518077 - Filbert Wijaya
+- 13518104 - Kevin Austin Stefano
+- 13518128 - Lionnarta Savirandy
+
+## Acknowledgments
+* Dosen IF2250 K2, Bpk. Wikan Danar Sunendyo
+* Asisten Pembimbing, Vincent Marselino

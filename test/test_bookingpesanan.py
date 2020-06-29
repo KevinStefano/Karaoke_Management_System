@@ -4,11 +4,11 @@ import pytest
 from datetime import date
 import sys
 sys.path.append('../src')
-from bookingpesanan import *
+from  bookingpesanan import *
 from pembatalanpesanan import *
 
 def test_cekMembershipCase1():
-    value = "michaelhans777@gmail.com"
+    value = "kevin@gmail.com"
     assert cekMembership(value) == True
 
 def test_cekMembershipCase2():
@@ -46,7 +46,8 @@ def test_getPriceOfRuanganCase1():
     assert getPriceOfRuangan(8, "kevin@gmail.com") == 70000
 
 def test_tambahPesananCase1():
-    id_pesanan = getTotalPesanan()+1
+    id_pesanan = getIDPesanan()
+    temp = getTotalPesanan()
     nama = "Michael Hans"
     email = None
     tanggal = date.today().strftime("%Y-%m-%d")
@@ -55,5 +56,5 @@ def test_tambahPesananCase1():
     durasi = "60"
     harga_akhir = getPriceOfRuangan(no_ruangan, email)
     tambahPesananRuangan(id_pesanan, nama, email, no_ruangan, tanggal, waktu_masuk, durasi, harga_akhir)
-    assert id_pesanan == getTotalPesanan()
+    assert temp+1 == getTotalPesanan()
     setBatal(str(id_pesanan))

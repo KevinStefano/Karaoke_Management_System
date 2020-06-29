@@ -5,8 +5,7 @@
 import mysql.connector
 
 # Mengakses database Karaoke KMS dalam sistem localhost
-mydb = mysql.connector.connect(host="localhost",user="root",passwd="2908Randy",database="kms")
-
+mydb = mysql.connector.connect(host="localhost",user="root",passwd="kevin123451001",database="DatabaseKMS")
 # Mengecek ada atau tidaknya seorang member
 def doesMemberExist(emailMember):
     mycursor = mydb.cursor()
@@ -37,7 +36,7 @@ def findUnpaidBookingTransaction(emailMember):
 # Mengambil iuran membership yang belum dibayar
 def findUnpaidMembershipTransaction(emailMember):
     mycursor = mydb.cursor()
-    formula = "select email, paket_membership, due_date from membership where due_date <= current_date() and email = %s"
+    formula = "select email, paket_membership, due_date from membership where due_date <= curdate() and email = %s"
     mycursor.execute(formula, (emailMember,))
     results = mycursor.fetchall()
     if(len(results) != 0):
@@ -54,8 +53,17 @@ def updateBookingTransaction(idPesanan):
 # Mengupdate table di pembayaranmembership untuk perpanjangan masa aktif member
 def updateMembershipTransaction(emailMember, harga):
     mycursor = mydb.cursor()
-    formula = "update pembayaranmembership set due_date_lama = due_date_baru, due_date_baru = date_add(due_date_baru, interval 1 year), total_harga = %s where email = %s"
-    mycursor.execute(formula, (harga, emailMember,))
-    formula2 = "update membership set due_date = (select due_date_baru from pembayaranmembership where email = %s) where email = %s"
-    mycursor.execute(formula2, (emailMember,emailMember,))
+    formula1 = "select * from pembayaranmembership where email = %s"
+    mycursor.execute(formula1,(emailMember,))
+    result = mycursor.fetchall()
+    if len(result) == 0:
+        query = "insert into pembayaranmembership values(%s, curdate(), date_add(curdate(), interval 1 year), %s)"
+        query2 = "update membership set due_date=date_add(curdate(), interval 1 year) where email=%s"
+        mycursor.execute(query,(emailMember, harga,))
+        mycursor.execute(query2, (emailMember,))
+    else:
+        formula = "update pembayaranmembership set due_date_lama = due_date_baru, due_date_baru = date_add(due_date_baru, interval 1 year), total_harga = %s where email = %s"
+        mycursor.execute(formula, (harga, emailMember,))
+        formula2 = "update membership set due_date = (select due_date_baru from pembayaranmembership where email = %s) where email = %s"
+        mycursor.execute(formula2, (emailMember, emailMember,))
     mydb.commit()

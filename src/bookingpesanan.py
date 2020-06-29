@@ -8,7 +8,7 @@ import mysql.connector
 import tkinter.messagebox as messagebox
 
 # Menghubungkan modul dengan database
-mydb = mysql.connector.connect(host="localhost",user="root",passwd="2908Randy",database="kms")
+mydb = mysql.connector.connect(host="localhost",user="root",passwd="kevin123451001",database="DatabaseKMS")
 
 # cekMembership -> mengecek email dalam tabel membership pada database
 def cekMembership(emailPelanggan):
@@ -47,6 +47,23 @@ def getTotalPesanan():
     mycursor.execute(formula)
     data = mycursor.fetchone()[0]
     return data
+
+# getIDPesanan -> membangkitkan IDPesanan secara unik dari database
+def getIDPesanan():
+    mycursor = mydb.cursor()
+    formula = "SELECT id_pesanan FROM daftarpemesanan ORDER BY id_pesanan ASC"
+    mycursor.execute(formula)
+    queryresult = mycursor.fetchall()
+    result = 1
+    iterator = 0
+    max_iterator = getTotalPesanan()
+    while (iterator < max_iterator):
+        if (result != queryresult[iterator][0]):
+            break
+        else:
+            result += 1
+            iterator += 1
+    return result
 
 # getPriceOfRuangan -> mengembalikan harga dari suatu ruangan
 def getPriceOfRuangan(nomor, email):
@@ -97,7 +114,7 @@ def tambahPesananRuangan(id_pesanan, nama, email, no_ruangan, tanggal, waktu_mas
 def bookNow(waktuInfo, ruanganInfo, namaInfo, alamatInfo, telpInfo, emailInfo):
     today = date.today()
     now = datetime.now()
-    id_pesanan = getTotalPesanan() + 1
+    id_pesanan = getIDPesanan()
     nama = namaInfo.get()
     email = emailInfo.get()
     tanggal = today.strftime("%Y-%m-%d")

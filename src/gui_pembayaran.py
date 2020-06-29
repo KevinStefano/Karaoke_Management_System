@@ -16,9 +16,11 @@ import tkinter.filedialog
 # Global Var
 current_id_pesanan = 0
 current_harga = 0
+
 def raise_frame(frame):
     frame.tkraise()
 
+# Fungsi untuk mencari dari tabel daftar pemesanan berdasarkan nomor ruangan
 def cariRuangan():
     global current_id_pesanan
     res = findUnpaidBookingTransaction(PilihanEmailMember1.get())
@@ -38,6 +40,7 @@ def cariRuangan():
     else:
         messagebox.showerror("Error","Data tidak ditemukan")
 
+# Fungsi untuk mencari seorang member dari tabel membership
 def cariMember():
     global current_harga
     res = findUnpaidMembershipTransaction(PilihanEmailMember.get())
@@ -57,6 +60,7 @@ def cariMember():
     else:
         messagebox.showerror("Error", "Data tidak ditemukan")
 
+# Fungsi untuk menghitung harga berdasarkan paket membership
 def cariHarga(jenisMembership):
     if(jenisMembership == "Bronze"):
         return 1000000
@@ -65,6 +69,7 @@ def cariHarga(jenisMembership):
     else:
         return 2000000
 
+# Fungsi untuk mengupdate tabel daftar pemesanan setelah pembayaran berhasil dilakukan
 def selesaiRuangan():
     updateBookingTransaction(current_id_pesanan)
     ListPembayaranRuangan.delete(*ListPembayaranRuangan.get_children())
@@ -76,6 +81,7 @@ def selesaiRuangan():
     Total.configure(state="readonly")
     Kembalian.configure(state="readonly")
 
+# Fungsi untuk mengupdate tabel pembayaran membership setelah pembayaran untuk iuran membership berhasil dilakukan
 def selesaiMembership():
     updateMembershipTransaction(PilihanEmailMember.get(),current_harga)
     ListPembayaranMember.delete(*ListPembayaranMember.get_children())
@@ -87,6 +93,7 @@ def selesaiMembership():
     Total1.configure(state="readonly")
     Kembalian1.configure(state="readonly")
 
+# Fungsi untuk menghitung kembalian di frame Ruangan
 def getKembalianRuangan():
     current_uang = int(Uang.get())
     current_total = int(Total.get())
@@ -99,6 +106,7 @@ def getKembalianRuangan():
         Kembalian.insert("end",str(kembalian))
         Kembalian.configure(state="readonly")
 
+# Fungsi untuk menghitung kembalian di frame Membership
 def getKembalianMembership():
     current_uang = int(Uang1.get())
     current_total = int(Total1.get())

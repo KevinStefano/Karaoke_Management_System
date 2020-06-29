@@ -9,15 +9,18 @@ from pembatalanpesanan import *
 import tkinter.font
 import tkinter.filedialog
 
+# Raise new frame
 def raise_frame(frame):
     frame.tkraise()
 
+# Handle when focus get in to username entry
 def handle_focusin_username(_):
     if(Username.get() == "username" and lockUser.get() == 0):
         Username.delete(0, END)
         Username.config(fg="black")
         lockUser.set(1)
 
+# Handle when focus get out from username entry
 def handle_focusout_username(_):
     if(Username.get() == "" and lockUser.get() == 1):
         Username.delete(0,END)
@@ -25,12 +28,14 @@ def handle_focusout_username(_):
         usernameVar.set("username")
         lockUser.set(0)
 
+# Handle when focus get in to password entry
 def handle_focusin_password(_):
     if(Password.get() == "password" and lockPass.get() == 0):
         Password.delete(0, END)
         Password.config(fg="black", show="*")
         lockPass.set(1)
 
+# Handle when focus get out from password entry
 def handle_focusout_password(_):
     if(Password.get() == "" and lockPass.get() == 1):
         Password.delete(0,END)
@@ -38,15 +43,18 @@ def handle_focusout_password(_):
         passwordVal.set("password")
         lockPass.set(0)
 
+# Handle when login button get enter keystroke
 def handle_enter_login(_):
     adminCheck()
 
+# Handle when focus get in to idtransaksi entry
 def handle_focusin_idtransaksi(_):
     if(IDTransaksi.get() == "ID Transaksi" and lockTrans.get() == 0):
         IDTransaksi.delete(0, END)
         IDTransaksi.config(fg="black")
         lockTrans.set(1)
 
+# Handle when focus get in from idtransaksi entry
 def handle_focusout_idtransaksi(_):
     if(IDTransaksi.get() == "" and lockTrans.get() == 1):
         IDTransaksi.delete(0,END)
@@ -62,6 +70,7 @@ def handle_focusout_idtransaksi(_):
         HargaAkhirL.config(text="")
         StatusBayarL.config(text="")
 
+# Handle when search button or idtransaksi entry get enter keystroke
 def handle_enter_search(_):
     if(IDTransaksi.get() == ""):
         NamaL.config(text="")
@@ -75,9 +84,11 @@ def handle_enter_search(_):
     else:
         showDetailPemesanan()
 
+# Error message when username or password doesn't match in database
 def messageError():
     messagebox.showerror("Login Failed","Username dan password yang dimasukkan salah")
 
+# Handle login admin to application
 def adminCheck():
     if(dataAdminProcessing(Username.get(),Password.get()) == 1):
         user = "Selamat datang, " + adminName(Username.get(), Password.get())
@@ -90,6 +101,7 @@ def adminCheck():
     else:
         messageError()
 
+# Message when admin want to cancel transaction
 def messageBatal():
     if(isDataPemesananValid(IDTransaksi.get())):
         Msg = messagebox.askquestion("Cancel","Yakin batalkan pesanan?",icon='warning')
@@ -99,6 +111,7 @@ def messageBatal():
     else:
         messagebox.showerror("Data Invalid","Data yang anda masukkan tidak tersedia")
 
+# Procedure to log out admin
 def logOutAdmin():
     if(loginVer.get() == 1):
         LoginButton["state"] = "normal"
@@ -113,12 +126,14 @@ def logOutAdmin():
         usernameVar.set("")
         raise_frame(FrameLogin)
 
+# Message when admin want to log out
 def messageLogout():
     Msg = messagebox.askquestion("Log Out", "Apakah anda ingin Log Out?")
     if Msg == 'yes':
         messagebox.showinfo("Log Out","Log Out berhasil")
         logOutAdmin()
 
+# Procedure to show detail of transaction
 def showDetailPemesanan():
     idp,nama,email,no,tgl,cin,duration,price,isbayar = getDataPemesanan(IDTransaksi.get())
     NamaL.config(text=nama)

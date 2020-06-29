@@ -4,8 +4,7 @@
 
 import mysql.connector
 
-mydb = mysql.connector.connect(host="localhost",user="root",passwd="2908Randy",database="kms")
-
+mydb = mysql.connector.connect(host="localhost",user="root",passwd="kevin123451001",database="DatabaseKMS")
 def isInDataAdmin(username, password):
     #return 1 if Found username and password in database
 #return 0 if is not found
@@ -52,7 +51,7 @@ def addDaftarRuangan(tipe,nomor, username):
     mydb.commit()
 
 def isNomorAvailable(nomor):
-    #return 1 if Found username and password in database
+    #return 1 if Found nomor ruangan in database
     #return 0 if is not found
     mycursor = mydb.cursor()
     formula = "SELECT * FROM DaftarRuangan"
@@ -65,7 +64,7 @@ def isNomorAvailable(nomor):
 
 
 def isTipeAvailable(tipe_):
-    #return 1 if Found username and password in database
+    #return 1 if Found tipe in database
     #return 0 if is not found
     mycursor = mydb.cursor()
     formula = "SELECT * FROM DaftarRuangan"

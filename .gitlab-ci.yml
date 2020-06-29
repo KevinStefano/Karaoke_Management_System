@@ -1,6 +1,13 @@
-first-job-1:
-     script:
-          - echo Hello World!
-     tags:
-          - ci
-          - ssh
+before_script:
+    - python --version
+    - pip install -r requirements.txt
+
+stages:
+    - Test
+
+pytest:
+    stage: Test
+    script:
+        - cd test/;pytest -v
+    tags:
+        - ci

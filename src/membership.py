@@ -4,9 +4,7 @@
 
 import mysql.connector
 from datetime import *
-
-mydb = mysql.connector.connect(host="localhost",user="root",passwd="2908Randy",database="kms")
-
+mydb = mysql.connector.connect(host="localhost",user="root",passwd="kevin123451001",database="DatabaseKMS")
 def isInDataAdmin(username, password):
     mycursor = mydb.cursor()
     formula = "SELECT * FROM DataAdmin"
